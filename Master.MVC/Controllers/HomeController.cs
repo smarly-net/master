@@ -8,9 +8,9 @@ namespace Master.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        public ActionResult Index()
         {
-            return "Hello mvc";
+            return View("Index");
         }
     }
 }
