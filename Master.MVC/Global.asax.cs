@@ -1,13 +1,17 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
+using Master.MVC.ViewEngins;
+
 namespace Master.MVC
 {
     public class Global : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
-            //Route r = new Route(null, (IRouteHandler)new MvcRouteHandler());
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new BlaBlaViewEngine());
+            ViewEngines.Engines.Add(new RazorViewEngine());
 
             RouteTable.Routes.MapRoute(
                 name: "Default",
