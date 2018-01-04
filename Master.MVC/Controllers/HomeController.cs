@@ -4,14 +4,9 @@ namespace Master.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public string Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            return View("Oops");
+            return "Hello mvc";
         }
     }
 }
