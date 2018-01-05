@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Master.MVC
@@ -7,36 +8,19 @@ namespace Master.MVC
     {
         protected void Application_Start()
         {
-            RouteTable.Routes.Add("MyRoute", new Route("{*blam}", new SampleRouteHandler()));
+            //routing doesn't know anything about variables controller and action
+
+            Route myRoute = new Route(
+                "{controller}/{action}/{id}", 
+                new RouteValueDictionary
+                {
+                    { "controller", "Home"},
+                    { "action", "Index" },
+                    { "id", UrlParameter.Optional  }
+                },
+                new MvcRouteHandler());
+
+            RouteTable.Routes.Add("Default_Route", myRoute);
         }
-    }
-
-    public class SampleRouteHandler : IRouteHandler
-    {
-        public IHttpHandler GetHttpHandler(RequestContext requestContext)
-        {
-            return new SampleHttpHandler(requestContext.RouteData);
-        }
-    }
-
-    public class SampleHttpHandler : IHttpHandler
-    {
-        private readonly RouteData _routeData;
-
-        public SampleHttpHandler(RouteData routeData)
-        {
-            _routeData = routeData;
-        }
-
-        public void ProcessRequest(HttpContext context)
-        {
-            var val = _routeData.Values["blam"];
-
-            var response = context.Response;
-
-            response.Write($"Your request was '{val}'");
-        }
-
-        public bool IsReusable { get; }
     }
 }
