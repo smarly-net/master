@@ -4,9 +4,19 @@ namespace Master.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        public string Index(string name)
         {
-            return "Hello mvc";
+            return $"Hello {name}";
+        }
+
+        public string About()
+        {
+            return "About page";
+        }
+
+        public string Common(string url)
+        {
+            return url;
         }
     }
 }
