@@ -1,6 +1,8 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.SessionState;
 
 namespace Master.MVC
 {
@@ -8,47 +10,47 @@ namespace Master.MVC
     {
         protected void Application_Start()
         {
-            RouteTable.Routes.RouteExistingFiles = true;
-            RouteTable.Routes.MapRoute(
-                name: "ActionPage",
-                url: "{action}-page",
-                defaults: new { controller = "Home" }
-            );
+            ControllerBuilder.Current.SetControllerFactory(new DefaultControllerFactory1());
 
-            RouteTable.Routes.MapRoute(
-                name: "Hello",
-                url: "hello/mvc",
-                defaults: new { controller = "Home", action = "About" }
-            );
+//            var f = new DefaultControllerFactory();
 
             RouteTable.Routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{name}",
-                defaults: new { controller = "Home", action = "Index", name = "Godel" }/*,
-                constraints: new { controller = "^H.*", action = "^Index$|^About$" }*/
-            );
-
-            RouteTable.Routes.MapRoute(
-                name: "AllUrls",
-                url: "any/{*url}",
-                defaults: new { controller = "Home", action = "Common" }/*,
-                constraints: new { chromeConstraint = new UserAgentConstraint("Chrome") }*/
+                url: "{controller}/{action}",
+                defaults: new { controller = "Home", action = "Index" }
             );
         }
     }
 
-    public class UserAgentConstraint : IRouteConstraint
+    public class DefaultControllerFactory1 : DefaultControllerFactory
     {
-        private string requiredUserAgent;
-        public UserAgentConstraint(string agentParam)
+        public override IController CreateController(RequestContext requestContext, string controllerName)
         {
-            requiredUserAgent = agentParam;
+            var controller = base.CreateController(requestContext, controllerName);
+            return controller;
         }
-        public bool Match(HttpContextBase httpContext, Route route, string parameterName,
-            RouteValueDictionary values, RouteDirection routeDirection)
+
+        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
-            return httpContext.Request.UserAgent != null &&
-                   httpContext.Request.UserAgent.Contains(requiredUserAgent);
+            var controllerInstance = base.GetControllerInstance(requestContext, controllerType);
+            return controllerInstance;
+        }
+
+        protected override SessionStateBehavior GetControllerSessionBehavior(RequestContext requestContext, Type controllerType)
+        {
+            var controllerSessionBehavior = base.GetControllerSessionBehavior(requestContext, controllerType);
+            return controllerSessionBehavior;
+        }
+
+        protected override Type GetControllerType(RequestContext requestContext, string controllerName)
+        {
+            var controllerType = base.GetControllerType(requestContext, controllerName);
+            return controllerType;
+        }
+
+        public override void ReleaseController(IController controller)
+        {
+            base.ReleaseController(controller);
         }
     }
 }
