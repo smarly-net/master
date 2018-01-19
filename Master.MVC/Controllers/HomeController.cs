@@ -1,18 +1,20 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics;
+using System.Web.Mvc;
+
+using Master.MVC.Filters;
 
 namespace Master.MVC.Controllers
 {
-    [RoutePrefix("Hello")]
     public class HomeController : Controller
     {
-        [Route("~/")]
-        [Route("home")]
-        [Route("")]
+        [OopsAuth]
+//        [Authorize]
         public string Index()
         {
+            Debug.WriteLine("Index");
             return "Hello MVC";
         }
-        [Route("about")]
+
         public string About()
         {
             return "About MVC";
