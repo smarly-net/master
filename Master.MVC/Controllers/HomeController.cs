@@ -7,20 +7,15 @@ namespace Master.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        public string Index()
+        [ActionResultFilterAttribute]
+        public ActionResult Index()
         {
-            return "Hello MVC";
+            return View();
         }
 
-        [OopsAuthenticationAttribute]
         public string About()
         {
             return "About MVC";
-        }
-
-        public string Login()
-        {
-            return "Login Page";
         }
     }
 }
