@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Web;
 using System.Web.Mvc;
 
 using Master.MVC.Filters;
@@ -7,15 +9,15 @@ namespace Master.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        [ActionResultFilterAttribute]
-        public ActionResult Index()
+        [OopsErrorAttribute]
+        public ActionResult Index(string id)
         {
-            return View();
-        }
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
 
-        public string About()
-        {
-            return "About MVC";
+            return this.View((object)id);
         }
     }
 }

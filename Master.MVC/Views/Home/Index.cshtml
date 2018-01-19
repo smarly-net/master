@@ -1,9 +1,7 @@
-﻿@using System.Diagnostics
+﻿@model string
+
 @{
   Layout = null;
-
-  Debug.WriteLine("View::Index");
-
 }
 
 <!DOCTYPE html>
@@ -14,7 +12,7 @@
 </head>
 <body>
 <div>
-    
+  <h1>@Model</h1>
 </div>
 </body>
 </html>

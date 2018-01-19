@@ -16,5 +16,30 @@ namespace Master.MVC
                 defaults: new { controller = "Home", action = "Index" }
             );
         }
+
+//        protected void Application_Error(object sender, EventArgs e)
+//        {
+//            Exception exception = Server.GetLastError();
+//            Response.Clear();
+//
+//            HttpException httpException = exception as HttpException;
+//            if (httpException != null)
+//            {
+//                string action;
+//                switch (httpException.GetHttpCode())
+//                {
+//                    case 404:
+//                        action = "HttpError404";
+//                        break;
+//                    default:
+//                        action = "General";
+//                        break;
+//                }
+//                // clear error on server
+//                Server.ClearError();
+//
+//                Response.Redirect($"~/Error/{action}/?message={exception.Message}");
+//            }
+//        }
     }
 }
