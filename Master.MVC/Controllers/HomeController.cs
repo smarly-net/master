@@ -9,7 +9,6 @@ namespace Master.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        [OopsErrorAttribute]
         public ActionResult Index(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
