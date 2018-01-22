@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.SessionState;
 
-using Master.MVC.Filters;
 
 namespace Master.MVC
 {
@@ -12,8 +11,6 @@ namespace Master.MVC
     {
         protected void Application_Start()
         {
-            GlobalFilters.Filters.Add(new OopsErrorAttributeAttribute());
-
             RouteTable.Routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}",
