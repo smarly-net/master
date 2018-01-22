@@ -13,9 +13,10 @@
 <body>
 <div>
   <h1>Custom Binder</h1>
-  @using (Html.BeginForm("DecodeBase64", "Home", FormMethod.Post))
+  @using (Html.BeginForm("Index", "Home", FormMethod.Post))
   { 
-    <input type="text" name="region" value="7" />
+    @Html.ValidationSummary()
+    <input type="text" name="byRegion.region" value="Minsk" />
     <input type="submit" value="Decode" />
   }
 </div>

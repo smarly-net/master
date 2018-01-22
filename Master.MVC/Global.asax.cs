@@ -11,8 +11,6 @@ namespace Master.MVC
     {
         protected void Application_Start()
         {
-            ModelBinders.Binders.Add(typeof(ByRegion), new ByRegionBinder());
-
             RouteTable.Routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}",
