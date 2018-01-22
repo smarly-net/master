@@ -12,7 +12,12 @@
 </head>
 <body>
 <div>
-  <h1>@Model</h1>
+  <h1>Upload file</h1>
+  @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  { 
+    <input type="file" name="Upload" />
+    <input type="submit" value="Upload" />
+  }
 </div>
 </body>
 </html>

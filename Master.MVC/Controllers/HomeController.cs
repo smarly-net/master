@@ -11,64 +11,18 @@ namespace Master.MVC.Controllers
     {
         public ActionResult Index(string id)
         {
-            if (id == "none")
-            {
-                throw new NotImplementedException();
-            }
-
             return this.View();
         }
 
-        #region Overrides of Controller
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        [HttpPost]
+        public string UploadFile(HttpPostedFileBase upload)
         {
-            Debug.WriteLine("IActionFilter::OnActionExecuting");
-            base.OnActionExecuting(filterContext);
-        }
+            HttpPostedFileWrapper dublicateUpload = (HttpPostedFileWrapper) ControllerContext.HttpContext.Request.Files["upload"];
 
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            Debug.WriteLine("IActionFilter::OnActionExecuted");
-            base.OnActionExecuted(filterContext);
-        }
+            byte[] bytes = new byte[upload.ContentLength];
+            var length = upload.InputStream.Read(bytes, 0, upload.ContentLength);
 
-        protected override void OnAuthentication(AuthenticationContext filterContext)
-        {
-            Debug.WriteLine("IAuthenticationFilter::OnAuthentication");
-            base.OnAuthentication(filterContext);
+            return upload.FileName;
         }
-
-        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
-        {
-            Debug.WriteLine("IAuthenticationFilter::OnAuthenticationChallenge");
-            base.OnAuthenticationChallenge(filterContext);
-        }
-
-        protected override void OnAuthorization(AuthorizationContext filterContext)
-        {
-            Debug.WriteLine("IAuthorizationFilter::OnAuthorization");
-            base.OnAuthorization(filterContext);
-        }
-
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            Debug.WriteLine("IExceptionFilter::OnException");
-            base.OnException(filterContext);
-        }
-
-        protected override void OnResultExecuted(ResultExecutedContext filterContext)
-        {
-            Debug.WriteLine("IResultFilter::OnResultExecuted");
-            base.OnResultExecuted(filterContext);
-        }
-
-        protected override void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-            Debug.WriteLine("IResultFilter::OnResultExecuting");
-            base.OnResultExecuting(filterContext);
-        }
-
-        #endregion
     }
 }
