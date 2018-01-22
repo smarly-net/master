@@ -12,11 +12,11 @@
 </head>
 <body>
 <div>
-  <h1>Upload file</h1>
-  @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  <h1>Decode base64</h1>
+  @using (Html.BeginForm("DecodeBase64", "Home", FormMethod.Post))
   { 
-    <input type="file" name="Upload" />
-    <input type="submit" value="Upload" />
+    <input type="text" name="base64" value="SGVsbG8hIEkgYW0gQmFzZTY0IHN0cmluZyA7LSk=" style="width: 400px;" />
+    <input type="submit" value="Decode" />
   }
 </div>
 </body>

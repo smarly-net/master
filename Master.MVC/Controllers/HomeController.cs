@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
@@ -15,14 +16,9 @@ namespace Master.MVC.Controllers
         }
 
         [HttpPost]
-        public string UploadFile(HttpPostedFileBase upload)
+        public string DecodeBase64(byte[] base64)
         {
-            HttpPostedFileWrapper dublicateUpload = (HttpPostedFileWrapper) ControllerContext.HttpContext.Request.Files["upload"];
-
-            byte[] bytes = new byte[upload.ContentLength];
-            var length = upload.InputStream.Read(bytes, 0, upload.ContentLength);
-
-            return upload.FileName;
+            return Encoding.UTF8.GetString(base64);
         }
     }
 }
