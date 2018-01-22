@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Linq;
 using System.Diagnostics;
 using System.Text;
 using System.Web;
@@ -16,9 +17,9 @@ namespace Master.MVC.Controllers
         }
 
         [HttpPost]
-        public string DecodeBase64(byte[] base64)
+        public string DecodeBase64(Binary binary)
         {
-            return Encoding.UTF8.GetString(base64);
+            return Encoding.UTF8.GetString(binary.ToArray());
         }
     }
 }
