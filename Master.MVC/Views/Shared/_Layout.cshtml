@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <title>@ViewData["Ctrl-Message"]</title>
+</head>
+<body>
+<div>
+  @if (IsSectionDefined("header"))
+  {
+    @RenderSection("header")
+  }
+  else
+  {
+    <div>Хедер с лайаута</div>
+  }
+  @RenderBody()
+  <p>какойто Html</p>
+  @RenderSection("bottom", required: true)
+</div>
+</body>
+</html>
