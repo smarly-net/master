@@ -15,7 +15,8 @@ namespace Master.MVC.Controllers
         [HttpGet]
         public ActionResult Index(string id)
         {
-            return this.View();
+            ViewData["Ctrl-Message"] = "Привет от контроллера";
+            return this.View(new ByRegion(){Region = "Минск"});
         }
 
         [HttpPost]
@@ -27,7 +28,7 @@ namespace Master.MVC.Controllers
             }
             else
             {
-                return this.View();
+                return this.View(byRegion);
             }
         }
     }

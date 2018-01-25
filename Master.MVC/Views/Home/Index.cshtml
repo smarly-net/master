@@ -1,7 +1,13 @@
-﻿@model string
+﻿@model Master.MVC.Controllers.ByRegion
 
 @{
   Layout = null;
+
+  string str = "Простая строка";
+
+  int value = 2;
+
+  string html = "<b>html текст</b>";
 }
 
 <!DOCTYPE html>
@@ -12,12 +18,42 @@
 </head>
 <body>
 <div>
-  <h1>Custom Binder</h1>
+
+  <p>@ViewData["Ctrl-Message"]</p>
+
+  <p>@str</p>
+
+  @foreach (var item in new[]
+  {
+    "Hello",
+    "mvc"
+  })
+  {
+    <p>Цикл @("Комплексные выражения для " + item)</p>
+  }
+
+  @if (value % 2 == 0)
+  {
+    <text>
+      Вывод текста без html тэгов
+    </text>
+  }
+
+  <h3>закодированный текст</h3>
+  @(html)
+
+  <h3>Html текст</h3>
+  @Html.Raw(html)
+
+  <h1>------------------------------</h1>
   @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-  { 
+  {
+    <p>Урл @Html.ActionLink("главной страницы", "Index") @Url.Action("Index")</p>
+
     @Html.ValidationSummary()
-    <input type="text" name="byRegion.region" value="Minsk" />
-    <input type="submit" value="Decode" />
+    @Html.TextBoxFor(x => x.Region)
+    @Html.ValidationMessageFor(x => x.Region)
+    <input type="submit" value="Submit"/>
   }
 </div>
 </body>
